@@ -152,7 +152,7 @@ body {
 }
 
 .card-title {
-    color: #7f8c8d;
+    color: #ffffff;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -161,7 +161,7 @@ body {
 .card-value {
     font-size: 36px;
     font-weight: bold;
-    color: #2c3e50;
+    color: #ffffff;
 }
 
 /* Tabelas */
@@ -176,7 +176,7 @@ table {
 }
 
 table thead {
-    background-color: #34495e;
+    background-color: #ffffff;
     color: white;
 }
 

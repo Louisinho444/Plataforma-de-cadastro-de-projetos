@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="auth-page">
-    <!-- Added wrapper for better centering -->
+
     <div class="auth-container">
         <div class="auth-box">
-            <h2>📝 Cadastro</h2>
+            <h2>Cadastro</h2>
             
             <?php
             include 'conexao.php';
@@ -54,7 +54,6 @@
                     <option value="">Selecione o tipo de usuário</option>
                     <option value="aluno">Aluno</option>
                     <option value="orientador">Orientador</option>
-                    <option value="admin">Admin</option>
                 </select>
                 <button type="submit">Cadastrar</button>
             </form>

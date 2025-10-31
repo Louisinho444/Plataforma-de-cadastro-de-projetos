@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="auth-page">
-    <!-- Added wrapper for better centering -->
+ 
     <div class="auth-container">
         <div class="auth-box">
-            <h2>🔐 Login</h2>
+            <h2> Login</h2>
             
             <?php if(isset($erro)) { ?>
                 <div class="message error"><?php echo $erro; ?></div>

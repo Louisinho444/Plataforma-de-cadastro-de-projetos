@@ -18,7 +18,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     try {
         $id_projeto = $_GET['delete'];
         
-        // Delete related records first
+    
         $pdo->prepare("DELETE FROM projeto_aluno WHERE id_projeto = ?")->execute([$id_projeto]);
         $pdo->prepare("DELETE FROM projetos WHERE id_projeto = ?")->execute([$id_projeto]);
         
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $alunos_texto = $_POST['alunos_texto'];
 
         if ($_POST['action'] === 'edit_project') {
-            // Update existing project
+            
             $id_projeto = $_POST['id_projeto'];
             $sql = "UPDATE projetos SET titulo = :titulo, resumo = :resumo, 
                     orientador_nome = :orientador_nome, area_nome = :area_nome, 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             exit;
             
         } else {
-            // Insert new project
+            
             $sql = "INSERT INTO projetos (titulo, resumo, orientador_nome, area_nome, id_status, alunos_texto) 
                     VALUES (:titulo, :resumo, :orientador_nome, :area_nome, :id_status, :alunos_texto)";
             $stmt = $pdo->prepare($sql);
@@ -146,7 +146,7 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
     <div class="container">
         <header class="header">
             <div class="header-content">
-                <h1>📚 Plataforma de Pesquisa</h1>
+                <h1> GestProj</h1>
                 <div class="user-section">
                     <span class="user-name">Olá, <?php echo htmlspecialchars($nome_usuario); ?></span>
                     <a href="login_user/logout.php" class="btn-logout">Sair</a>
@@ -174,12 +174,12 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
             <?php endif; ?>
 
             <?php if ($mostrar_relatorio): ?>
-                <!-- Simple report view -->
+              
                 <div class="report-container">
                     <div class="report-header">
-                        <h2>📊 Relatório de Projetos</h2>
+                        <h2> Relatório de Projetos</h2>
                         <div>
-                            <button onclick="window.print()" class="btn btn-primary">🖨️ Imprimir</button>
+                            <button onclick="window.print()" class="btn btn-primary"> Imprimir</button>
                             <a href="index.php" class="btn btn-secondary">Voltar</a>
                         </div>
                     </div>
@@ -230,7 +230,7 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
             <?php elseif ($mostrar_form || $editando): ?>
                 <!-- Add/Edit project form -->
                 <div class="form-container">
-                    <h3><?php echo $editando ? '✏️ Editar Projeto' : '➕ Novo Projeto'; ?></h3>
+                    <h3><?php echo $editando ? ' Editar Projeto' : ' Novo Projeto'; ?></h3>
                     <form method="POST" class="project-form">
                         <input type="hidden" name="action" value="<?php echo $editando ? 'edit_project' : 'add_project'; ?>">
                         <?php if ($editando): ?>
@@ -253,7 +253,7 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="orientador_nome">Orientador *</label>
-                                <!-- Changed from select to text input -->
+                                
                                 <input type="text" id="orientador_nome" name="orientador_nome" required 
                                        value="<?php echo $editando ? htmlspecialchars($projeto_edit['orientador_nome']) : ''; ?>"
                                        placeholder="Digite o nome do orientador" maxlength="100">
@@ -261,7 +261,7 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
 
                             <div class="form-group">
                                 <label for="area_nome">Área de Pesquisa *</label>
-                                <!-- Changed from select to text input -->
+                              
                                 <input type="text" id="area_nome" name="area_nome" required 
                                        value="<?php echo $editando ? htmlspecialchars($projeto_edit['area_nome']) : ''; ?>"
                                        placeholder="Digite a área de pesquisa" maxlength="100">
@@ -283,25 +283,25 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
 
                         <div class="form-group">
                             <label for="alunos_texto">Alunos Participantes</label>
-                            <!-- Changed from checkboxes to textarea -->
+                           
                             <textarea id="alunos_texto" name="alunos_texto" rows="3" 
                                       placeholder="Digite os nomes dos alunos participantes (separe por vírgula ou linha)"><?php echo $editando ? htmlspecialchars($projeto_edit['alunos_texto']) : ''; ?></textarea>
                             <small class="form-hint">Exemplo: João Silva, Maria Santos, Pedro Oliveira</small>
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success">💾 Salvar Projeto</button>
+                            <button type="submit" class="btn btn-success"> Salvar Projeto</button>
                             <a href="index.php" class="btn btn-secondary">Cancelar</a>
                         </div>
                     </form>
                 </div>
             <?php else: ?>
-                <!-- Projects list with filters -->
+
                 <div class="actions-bar">
                     <h2>Projetos de Pesquisa</h2>
                     <div class="action-buttons">
-                        <a href="?report=1" class="btn btn-info">📊 Relatório</a>
-                        <a href="?add=1" class="btn btn-primary">➕ Adicionar Projeto</a>
+                        <a href="?report=1" class="btn btn-info"> Relatório</a>
+                        <a href="?add=1" class="btn btn-primary"> Adicionar Projeto</a>
                     </div>
                 </div>
 
@@ -323,9 +323,9 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
 
                         <div class="filter-group">
                             <label for="filter-area">Área:</label>
-                            <!-- Changed filter to text input with datalist for suggestions -->
+                          
                             <input type="text" id="filter-area" name="area" 
-                                   value="<?php echo htmlspecialchars($filtro_area); ?>"
+                                   value="<?php echo htmlspecialchars($filtro_area); ?>"    
                                    placeholder="Digite para filtrar"
                                    list="areas-list">
                             <datalist id="areas-list">
@@ -337,7 +337,7 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
 
                         <div class="filter-group">
                             <label for="filter-orientador">Orientador:</label>
-                            <!-- Changed filter to text input with datalist for suggestions -->
+                            
                             <input type="text" id="filter-orientador" name="orientador" 
                                    value="<?php echo htmlspecialchars($filtro_orientador); ?>"
                                    placeholder="Digite para filtrar"
@@ -349,7 +349,7 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
                             </datalist>
                         </div>
 
-                        <!-- Added search button since filters don't auto-submit anymore -->
+                       
                         <button type="submit" class="btn btn-primary btn-small">🔍 Filtrar</button>
 
                         <?php if ($filtro_status || $filtro_area || $filtro_orientador): ?>
@@ -396,34 +396,34 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
                                 
                                 <div class="project-info">
                                     <div class="info-row">
-                                        <strong>👨‍🏫 Orientador:</strong> 
-                                        <!-- Display text field instead of joined data -->
+                                        <strong> Orientador:</strong> 
+                                      
                                         <?php echo htmlspecialchars($projeto['orientador_nome'] ?? 'Não definido'); ?>
                                     </div>
                                     <div class="info-row">
-                                        <strong>📚 Área:</strong> 
-                                        <!-- Display text field instead of joined data -->
+                                        <strong> Área:</strong> 
+                                       
                                         <?php echo htmlspecialchars($projeto['area_nome'] ?? 'Não definida'); ?>
                                     </div>
-                                    <!-- Added students display -->
+                                   
                                     <?php if (!empty($projeto['alunos_texto'])): ?>
                                     <div class="info-row">
-                                        <strong>👥 Alunos:</strong> 
+                                        <strong> Alunos:</strong> 
                                         <?php echo htmlspecialchars($projeto['alunos_texto']); ?>
                                     </div>
                                     <?php endif; ?>
                                     <div class="info-row">
-                                        <strong>📅 Criado em:</strong> 
+                                        <strong> Criado em:</strong> 
                                         <?php echo date('d/m/Y', strtotime($projeto['data_criacao'])); ?>
                                     </div>
                                 </div>
 
-                                <!-- Add edit and delete buttons -->
+                             
                                 <div class="project-actions">
-                                    <a href="?edit=<?php echo $projeto['id_projeto']; ?>" class="btn btn-edit">✏️ Editar</a>
+                                    <a href="?edit=<?php echo $projeto['id_projeto']; ?>" class="btn btn-edit"> Editar</a>
                                     <a href="?delete=<?php echo $projeto['id_projeto']; ?>" 
                                        class="btn btn-delete"
-                                       onclick="return confirm('Tem certeza que deseja excluir este projeto?')">🗑️ Excluir</a>
+                                       onclick="return confirm('Tem certeza que deseja excluir este projeto?')"> Excluir</a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -433,7 +433,7 @@ $mostrar_relatorio = isset($_GET['report']) && $_GET['report'] === '1';
                         <div class="empty-icon">📂</div>
                         <h3>Nenhum projeto encontrado</h3>
                         <p><?php echo ($filtro_status || $filtro_area || $filtro_orientador) ? 'Tente ajustar os filtros.' : 'Comece adicionando seu primeiro projeto de pesquisa.'; ?></p>
-                        <a href="?add=1" class="btn btn-primary">➕ Adicionar Primeiro Projeto</a>
+                        <a href="?add=1" class="btn btn-primary"> Adicionar Primeiro Projeto</a>
                     </div>
                 <?php endif; ?>
             <?php endif; ?>
